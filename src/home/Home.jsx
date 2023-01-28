@@ -9,7 +9,7 @@ function Home() {
           <span>ApI sEaRcH </span> <span>QUIZ</span>
         </header>
         <div className="homepage__body">
-          <header>Guide/Instructions</header>
+          <header>Guide / Instructions</header>
           <ul>
             <li>
               The question listed are ment to be answered either true or false
