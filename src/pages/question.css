@@ -52,7 +52,7 @@
   margin: 1rem auto;
 }
 
-.alternatives button {
+.alternatives a button {
   color: #fff;
   border: none;
   width: fit-content;
@@ -65,20 +65,20 @@
   cursor: pointer;
 }
 
-.alternatives button:nth-of-type(1) {
+.alternatives a:nth-of-type(1) button {
   background-color: #310331;
 }
 
-.alternatives button:nth-of-type(2) {
-  background-color: brown;
+.alternatives a:nth-of-type(2) button {
+  background-color: maroon;
 }
 
-.alternatives button:nth-of-type(1):hover {
-  background-color: brown;
+.alternatives a:nth-of-type(1):hover button {
+  background-color: maroon;
   box-shadow: 0 0 10px #fff;
 }
 
-.alternatives button:nth-of-type(2):hover {
+.alternatives a:nth-of-type(2):hover button {
   background-color: #310331;
   box-shadow: 0 0 10px #fff;
 }

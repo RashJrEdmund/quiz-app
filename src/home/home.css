@@ -89,6 +89,6 @@
 }
 
 .homePage .advance-btn:hover {
-  background-color: #310331;
-  color: #fff;
+  transform: translateY(-10px);
+  box-shadow: 0 0 10px #000;
 }

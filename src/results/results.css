@@ -104,10 +104,10 @@
   padding: 10px 1rem;
   transition: 0.5s;
   border-radius: 10px;
-  
+  cursor: pointer;
 }
 
 .option button:hover {
-  background-color: #310331;
-  color: #fff;
+  transform: translateY(-10px);
+  box-shadow: 0 0 10px #000;
 }

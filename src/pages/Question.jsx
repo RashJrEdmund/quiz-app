@@ -1,58 +1,44 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/prop-types */
 import './question.css';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-function Question({ nextPath, pageHeader = '/question1' }) {
-  const URL = `https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean`;
-  let data;
-  let errorMessage = '';
-  fetch(URL)
-    .then((response) => {
-      response.json();
-      data = response;
-      console.log('this is data', data);
-      return data;
-    })
-    .catch((error) => {
-      errorMessage = error;
-      document.querySelector('.question-whole').style =
-        'display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 700;';
-
-      document.querySelector('.question-whole').innerHTML = 'Getting data...';
-      setTimeout(() => {
-        document.querySelector('.question-whole').innerHTML =
-          'An Error Occured While Fetching Api: </br></br> Check network connection and try refreshing page';
-      }, 3000);
-      return errorMessage;
-    });
-
-  console.log('this data', typeof data);
-
+function Question({
+  nextPath,
+  pageIndex = 1,
+  QUESTION = { question: 'koki naeti?' },
+}) {
+  // eslint-disable-next-line no-unused-vars
   return (
     <div className="question-whole">
-      {errorMessage === '' ? (
+      {QUESTION.length > 0 && (
         <div className="questionPage">
-          <header>{pageHeader} out of 10</header>
-          <p className="questionSepSep">this is a sample question</p>
+          <header> Question {pageIndex + 1} out of 10</header>
+          {/* <p
+          className="questionSepSep"
+          dangerouslySetInnerHTML={{ __html: QUESTION[pageIndex].question }}
+        /> */}
+          <p
+            className="questionSepSep"
+            dangerouslySetInnerHTML={{ __html: QUESTION[pageIndex].question }}
+          />
 
           <div className="alternatives">
-            <button className="true_btn" type="button">
-              True
-            </button>
-            <button className="false" type="button">
-              False
-            </button>
-          </div>
+            <Link to={nextPath}>
+              <button className="true_btn" type="button">
+                True
+              </button>
+            </Link>
 
-          <Link to={nextPath}>
-            <button className="nextPage" type="button">
-              Next Question
-            </button>
-          </Link>
+            <Link to={nextPath}>
+              <button className="false" type="button">
+                False
+              </button>
+            </Link>
+          </div>
         </div>
-      ) : (
-        (document.querySelector('.question-whole').innerHTML = 'errorMessage')
       )}
     </div>
   );
