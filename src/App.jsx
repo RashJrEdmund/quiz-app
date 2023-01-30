@@ -33,99 +33,13 @@ function App() {
           <Route index element={<Home />} />
 
           <Route
-            path="/question1"
+            path="/question/:id"
             element={
               <Question
                 pageIndex={0}
-                nextPath="/question2"
+                nextPath="/question/:id"
                 QUESTION={question}
               />
-            }
-          />
-          <Route
-            path="/question2"
-            element={
-              <Question
-                pageIndex={1}
-                nextPath="/question3"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question3"
-            element={
-              <Question
-                pageIndex={2}
-                nextPath="/question4"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question4"
-            element={
-              <Question
-                pageIndex={3}
-                nextPath="/question5"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question5"
-            element={
-              <Question
-                pageIndex={4}
-                nextPath="/question6"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question6"
-            element={
-              <Question
-                pageIndex={5}
-                nextPath="/question7"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question7"
-            element={
-              <Question
-                pageIndex={6}
-                nextPath="/question8"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question8"
-            element={
-              <Question
-                pageIndex={7}
-                nextPath="/question9"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question9"
-            element={
-              <Question
-                pageIndex={8}
-                nextPath="/question10"
-                QUESTION={question}
-              />
-            }
-          />
-          <Route
-            path="/question10"
-            element={
-              <Question pageIndex={9} nextPath="/results" QUESTION={question} />
             }
           />
 

@@ -8,7 +8,11 @@ import { useState, useEffect } from 'react';
 function Question({
   nextPath,
   pageIndex = 1,
-  QUESTION = { question: 'koki naeti?' },
+  QUESTION = [
+    { question: 'koki na life' },
+    { question: 'garri na joy' },
+    { question: 'chai' },
+  ],
 }) {
   // eslint-disable-next-line no-unused-vars
   return (
