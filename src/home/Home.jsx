@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import './home.css';
 import { Link } from 'react-router-dom';
 
-function Home() {
+function Home({ changePage, number }) {
   return (
     <div className="whole">
       <div className="homePage">
@@ -29,8 +30,8 @@ function Home() {
             </li>
           </ul>
         </div>
-        <Link to="/question1">
-          <button type="button" className="advance-btn">
+        <Link to={`/question/${number}`}>
+          <button type="button" className="advance-btn" onClick={changePage}>
             Advance
           </button>
         </Link>

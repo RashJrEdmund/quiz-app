@@ -21,7 +21,7 @@ function Results({ rights = 5, wrongs = 5 }) {
         <p className="would-you-like">would You like to restart the quize?</p>
 
         <div className="option">
-          <Link to="/question1">
+          <Link to="/question/0">
             <button type="button" className="retake">
               Restart
             </button>

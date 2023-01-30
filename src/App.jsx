@@ -9,7 +9,9 @@ import Results from './results/Results';
 
 function App() {
   const [question, setQuestion] = useState([]);
-  console.log('this questions log 1', question);
+  // console.log('this questions log 1', question);
+
+  const [pageNumber, SetPageNumber] = useState(0);
 
   useEffect(() => {
     Getdata()
@@ -30,19 +32,29 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route index element={<Home />} />
-
+          <Route
+            index
+            element={
+              <Home
+                changePage={() => {
+                  SetPageNumber((prevPage) => prevPage + 1);
+                  console.log(pageNumber);
+                }}
+                number={pageNumber}
+              />
+            }
+          />
           <Route
             path="/question/:id"
             element={
               <Question
                 pageIndex={0}
-                nextPath="/question/:id"
                 QUESTION={question}
+                changePage={() => SetPageNumber((prevPage) => prevPage + 1)}
+                number={pageNumber}
               />
             }
           />
-
           <Route path="/results" element={<Results />} />
         </Routes>
       </BrowserRouter>
