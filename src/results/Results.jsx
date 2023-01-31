@@ -1,8 +1,9 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import './results.css';
 import { Link } from 'react-router-dom';
 
-function Results({ rights = 5, wrongs = 5 }) {
+function Results({ finalAnswers }) {
   return (
     <div className="results-whole">
       <div className="results-page">
@@ -10,13 +11,23 @@ function Results({ rights = 5, wrongs = 5 }) {
         <div className="score">
           <div className="rights">
             <p>Correct</p>
-            <span>{rights}</span>
+            <span>{finalAnswers.passed}</span>
           </div>
           <div className="wrongs">
             <p>Wrong</p>
-            <span>{wrongs}</span>
+            <span>{finalAnswers.failed}</span>
           </div>
         </div>
+
+        <p className="my-review">
+          {finalAnswers.passed < 5
+            ? finalAnswers.passed < 2
+              ? 'Nothing personal 😹 😂'
+              : 'Better luck next time 😟'
+            : finalAnswers.passed > 7
+              ? 'You are an Excellent someone 👏😌'
+              : 'Very good 😉'}
+        </p>
 
         <p className="would-you-like">would You like to restart the quize?</p>
 

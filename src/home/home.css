@@ -89,6 +89,6 @@
 }
 
 .homePage .advance-btn:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 0 10px #000;
+  transform: translateY(-5px);
+  box-shadow: 0 0 10px #310331;
 }

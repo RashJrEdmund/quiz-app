@@ -78,6 +78,12 @@
   padding: 1rem 1.6rem;
 }
 
+.results-page .my-review {
+  width: fit-content;
+  margin: 1rem auto;
+  font-size: 1.3rem;
+}
+
 .results-page .would-you-like {
   width: fit-content;
   margin: 3rem auto 1rem;

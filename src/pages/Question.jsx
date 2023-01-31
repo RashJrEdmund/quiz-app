@@ -4,12 +4,17 @@
 import './question.css';
 import { Link } from 'react-router-dom';
 
-function Question({ QUESTION, changePage, number }) {
+function Question({ QUESTION, changePage, number, countAnswers }) {
   const checkAnswer = (value, index) => {
-    if (QUESTION[index].correct_answer === value) {
-      console.log('correct Answer');
-    }
+    const correcAnswer = QUESTION[index].correct_answer;
+    console.log(
+      'you clicked:',
+      value,
+      `${value === correcAnswer ? 'and' : 'but'} correct_answer is:`,
+      correcAnswer
+    );
   };
+
   return (
     <div className="question-whole">
       {QUESTION.length > 0 && (
@@ -24,17 +29,18 @@ function Question({ QUESTION, changePage, number }) {
             dangerouslySetInnerHTML={{ __html: QUESTION[number].question }}
           />
 
+          {console.log('this is Questions', QUESTION)}
+
           <div className="alternatives">
             <Link to={number === 9 ? '/results' : `/question/${number}`}>
               <button
                 className="true_btn"
-                id="btn"
                 value="True"
                 type="button"
                 onClick={(e) => {
-                  changePage;
                   checkAnswer(e.target.value, number);
-                  console.log(e.target.value);
+                  countAnswers(e.target.value, QUESTION[number].correct_answer); // this is the function passed as parameter to update the anserCount
+                  changePage();
                 }}
               >
                 True
@@ -42,7 +48,16 @@ function Question({ QUESTION, changePage, number }) {
             </Link>
 
             <Link to={number === 9 ? '/results' : `/question/${number}`}>
-              <button className="false" type="button" onClick={changePage}>
+              <button
+                className="false"
+                value="False"
+                type="button"
+                onClick={(e) => {
+                  checkAnswer(e.target.value, number);
+                  countAnswers(e.target.value, QUESTION[number].correct_answer); // this is the function passed as parameter to update the anserCount
+                  changePage();
+                }}
+              >
                 False
               </button>
             </Link>
