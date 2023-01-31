@@ -24,20 +24,22 @@ function App() {
 
   const [answerTracker, setAnswerTracker] = useState({ passed: 0, failed: 0 });
 
+  console.log(res.data1);
+
   const updateAnswerTracker = (ans, correctAns) => {
-    console.log(
-      'updateAnswerTracker was entered, heres previous anserTracker',
-      answerTracker
-    );
+    // console.log(
+    //   'updateAnswerTracker was entered, heres previous anserTracker',
+    //   answerTracker
+    // );
     ans === correctAns
       ? setAnswerTracker({
-          passed: answerTracker.passed + 1,
-          failed: answerTracker.failed,
-        })
+        passed: answerTracker.passed + 1,
+        failed: answerTracker.failed,
+      })
       : setAnswerTracker({
-          passed: answerTracker.passed,
-          failed: answerTracker.failed + 1,
-        });
+        passed: answerTracker.passed,
+        failed: answerTracker.failed + 1,
+      });
 
     console.log('this the new answerTracker', answerTracker);
   };
