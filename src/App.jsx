@@ -6,6 +6,7 @@ import Getdata from './data/Getdata';
 import Home from './home/Home';
 import Question from './pages/Question';
 import Results from './results/Results';
+import { QuestionsProvider } from './context/Context';
 
 function App() {
   const handleError = () => {
@@ -18,29 +19,29 @@ function App() {
     }, 2000);
   };
   const [question, setQuestion] = useState([]);
-  // console.log('this questions log 1', question);
 
   const [pageNumber, SetPageNumber] = useState(0);
 
   const [answerTracker, setAnswerTracker] = useState({ passed: 0, failed: 0 });
 
-  console.log(res.data1);
+  const changePage = () => SetPageNumber((prevPage) => prevPage + 1);
 
   const updateAnswerTracker = (ans, correctAns) => {
     // console.log(
     //   'updateAnswerTracker was entered, heres previous anserTracker',
     //   answerTracker
     // );
-    ans === correctAns
-      ? setAnswerTracker({
+    if (ans === correctAns) {
+      setAnswerTracker({
         passed: answerTracker.passed + 1,
         failed: answerTracker.failed,
-      })
-      : setAnswerTracker({
+      });
+    } else {
+      setAnswerTracker({
         passed: answerTracker.passed,
         failed: answerTracker.failed + 1,
       });
-
+    }
     console.log('this the new answerTracker', answerTracker);
   };
 
@@ -55,38 +56,49 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route
-            index
-            element={
-              <Home
-                changePage={() => {
-                  SetPageNumber((prevPage) => prevPage + 0);
-                  console.log('this is home pageNumber', pageNumber);
-                }}
-                number={pageNumber}
-              />
-            }
-          />
-          <Route
-            path="/question/:id"
-            element={
-              <Question
-                pageIndex={0}
-                QUESTION={question}
-                changePage={() => SetPageNumber((prevPage) => prevPage + 1)}
-                number={pageNumber}
-                countAnswers={updateAnswerTracker}
-              />
-            }
-          />
-          <Route
-            path="/results"
-            element={<Results finalAnswers={answerTracker} />}
-          />
-        </Routes>
-      </BrowserRouter>
+      <QuestionsProvider
+        value={{
+          question,
+          changePage,
+          pageNumber,
+          updateAnswerTracker,
+          answerTracker,
+        }}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route
+              index
+              element={
+                <Home
+                  changePage={() => {
+                    // SetPageNumber((prevPage) => prevPage + 0);
+                    console.log('this is home pageNumber', pageNumber);
+                  }}
+                  number={pageNumber}
+                />
+              }
+            />
+            <Route
+              path="/question/:id"
+              element={
+                // element={Question} use use Context here
+                <Question
+                  pageIndex={0}
+                  QUESTION={question}
+                  changePage={() => SetPageNumber((prevPage) => prevPage + 1)}
+                  number={pageNumber}
+                  countAnswers={updateAnswerTracker}
+                />
+              }
+            />
+            <Route
+              path="/results"
+              element={<Results finalAnswers={answerTracker} />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </QuestionsProvider>
     </div>
   );
 }

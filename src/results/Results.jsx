@@ -25,8 +25,8 @@ function Results({ finalAnswers }) {
               ? 'Nothing personal 😹 😂'
               : 'Better luck next time 😟'
             : finalAnswers.passed > 7
-              ? 'You are an Excellent someone 👏😌'
-              : 'Very good 😉'}
+            ? 'You are an Excellent someone 👏😌'
+            : 'Very good 😉'}
         </p>
 
         <p className="would-you-like">would You like to restart the quize?</p>
