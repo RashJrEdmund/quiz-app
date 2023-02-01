@@ -6,7 +6,7 @@ import { QuestionsConsumer } from '../context/Context';
 function Home() {
   return (
     <QuestionsConsumer>
-      {({ changePage, pageNumber }) => {
+      {({ changePage }) => {
         return (
           <div className="whole">
             <div className="homePage">
@@ -34,11 +34,11 @@ function Home() {
                   </li>
                 </ul>
               </div>
-              <Link to={`/question/${pageNumber}`}>
+              <Link to="/question/0">
                 <button
                   type="button"
                   className="advance-btn"
-                  onClick={changePage}
+                  onClick={() => changePage()}
                 >
                   Advance
                 </button>

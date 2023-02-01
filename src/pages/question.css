@@ -15,19 +15,35 @@
 
 .questionPage {
   background-color: peru;
+  position: relative;
   box-shadow: 0 0 10px #000;
   color: #fff;
   width: 98vw;
   max-width: 800px;
   height: fit-content;
-  padding: 1rem;
+  padding: 2.5rem 1rem 1rem;
   margin: auto;
   display: flex;
   flex-direction: column;
   border-radius: 2rem;
 }
 
-.questionPage > header {
+.questionPage .category {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.questionPage .category span {
+  color: #a52a2a;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.questionPage>header {
   width: fit-content;
   font-size: 1.6rem;
   margin: 3rem auto;
@@ -104,6 +120,6 @@
 
 .questionPage .nextPage:hover {
   background-color: peru;
-  border:  1px solid #000;
+  border: 1px solid #000;
   color: #fff;
 }

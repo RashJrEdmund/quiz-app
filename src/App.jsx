@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import './App.css';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -24,13 +25,13 @@ function App() {
 
   const [answerTracker, setAnswerTracker] = useState({ passed: 0, failed: 0 });
 
-  const changePage = () => SetPageNumber((prevPage) => prevPage + 1);
+  const changePage = () => {
+    pageNumber === 9
+      ? SetPageNumber(0)
+      : SetPageNumber((prevPage) => prevPage + 1);
+  };
 
   const updateAnswerTracker = (ans, correctAns) => {
-    // console.log(
-    //   'updateAnswerTracker was entered, heres previous anserTracker',
-    //   answerTracker
-    // );
     if (ans === correctAns) {
       setAnswerTracker({
         passed: answerTracker.passed + 1,
@@ -42,7 +43,6 @@ function App() {
         failed: answerTracker.failed + 1,
       });
     }
-    console.log('this the new answerTracker', answerTracker);
   };
 
   useEffect(() => {
@@ -52,7 +52,6 @@ function App() {
         handleError();
       });
   }, []);
-  // console.log('this is questions of 1', typeof question[1]);
 
   return (
     <div className="App">
@@ -63,39 +62,20 @@ function App() {
           pageNumber,
           updateAnswerTracker,
           answerTracker,
+          setAnswerTracker,
         }}
       >
         <BrowserRouter>
           <Routes>
-            <Route
-              index
-              element={
-                <Home
-                  changePage={() => {
-                    // SetPageNumber((prevPage) => prevPage + 0);
-                    console.log('this is home pageNumber', pageNumber);
-                  }}
-                  number={pageNumber}
-                />
-              }
-            />
+            <Route index element={<Home />} />
             <Route
               path="/question/:id"
               element={
                 // element={Question} use use Context here
-                <Question
-                  pageIndex={0}
-                  QUESTION={question}
-                  changePage={() => SetPageNumber((prevPage) => prevPage + 1)}
-                  number={pageNumber}
-                  countAnswers={updateAnswerTracker}
-                />
+                <Question />
               }
             />
-            <Route
-              path="/results"
-              element={<Results finalAnswers={answerTracker} />}
-            />
+            <Route path="/results" element={<Results />} />
           </Routes>
         </BrowserRouter>
       </QuestionsProvider>
