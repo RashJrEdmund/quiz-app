@@ -58,6 +58,15 @@
   margin: 10px 0 0;
 }
 
+.results-whole .correction-header {
+  width: fit-content;
+  margin: 1rem auto 0;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
 .score .rights span {
   background-color: #310331;
   font-size: 1.3rem;

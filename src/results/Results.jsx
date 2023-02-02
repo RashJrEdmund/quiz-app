@@ -13,7 +13,7 @@ function Results() {
         const displayResults = () => {
           if (answerTracker.passed < 5) {
             if (answerTracker.passed < 2) {
-              return 'Nothing personal 😹 😂';
+              return 'Nothing personal 😹';
             }
             return 'Better luck next time 😟';
           }
@@ -38,6 +38,10 @@ function Results() {
               </div>
 
               <p className="my-review">{displayResults()}</p>
+
+              <p className="correction-header">
+                Below are the questions and right answers:
+              </p>
 
               <ol className="questions-ans">
                 {question.map((ques, index) => {
