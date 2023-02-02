@@ -11,7 +11,6 @@ function Results() {
     <QuestionsConsumer>
       {({ answerTracker, setAnswerTracker, question }) => {
         const displayResults = () => {
-          console.log(question);
           if (answerTracker.passed < 5) {
             if (answerTracker.passed < 2) {
               return 'Nothing personal 😹 😂';
