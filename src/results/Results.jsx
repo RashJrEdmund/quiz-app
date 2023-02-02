@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/no-danger */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/prop-types */
 import './results.css';
@@ -7,8 +9,9 @@ import { QuestionsConsumer } from '../context/Context';
 function Results() {
   return (
     <QuestionsConsumer>
-      {({ answerTracker, setAnswerTracker }) => {
+      {({ answerTracker, setAnswerTracker, question }) => {
         const displayResults = () => {
+          console.log(question);
           if (answerTracker.passed < 5) {
             if (answerTracker.passed < 2) {
               return 'Nothing personal 😹 😂';
@@ -36,6 +39,21 @@ function Results() {
               </div>
 
               <p className="my-review">{displayResults()}</p>
+
+              <ol className="questions-ans">
+                {question.map((ques, index) => {
+                  return (
+                    <li key={index}>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: ques.question,
+                        }}
+                      />
+                      <span className="correct-ans">{ques.correct_answer}</span>
+                    </li>
+                  );
+                })}
+              </ol>
 
               <p className="would-you-like">
                 would You like to restart the quize?

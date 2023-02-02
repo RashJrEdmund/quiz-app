@@ -3,11 +3,10 @@
 }
 
 .results-whole {
-  background-color: #ccc;
-  background-color: peru;
   background-color: #310331;
   width: 100vw;
-  height: 100vh;
+  height: fit-content;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   margin: 0;
@@ -15,7 +14,6 @@
 }
 
 .results-whole .results-page {
-  background-color: peru;
   background-color: steelblue;
   box-shadow: 0 0 10px #000;
   color: #fff;
@@ -82,6 +80,10 @@
   width: fit-content;
   margin: 1rem auto;
   font-size: 1.3rem;
+}
+
+.questions-ans .correct-ans {
+  border-bottom: 1px solid #000;
 }
 
 .results-page .would-you-like {
