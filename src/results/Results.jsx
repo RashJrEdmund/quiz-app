@@ -18,7 +18,7 @@ function Results() {
           if (answerTracker.passed > 7) {
             return 'You are an Excellent someone 👏😌';
           }
-          return 'Very good 😉';
+          return 'good good 😉';
         };
         return (
           <div className="results-whole">
