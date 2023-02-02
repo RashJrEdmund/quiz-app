@@ -106,20 +106,14 @@
   height: fit-content;
 }
 
-.questionPage .nextPage {
-  color: #310331;
-  font-weight: 600;
-  border: none;
-  width: fit-content;
-  align-self: flex-end;
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.questionPage .nextPage:hover {
-  background-color: peru;
-  border: 1px solid #000;
-  color: #fff;
+@media only screen and (max-width: 600px) {
+  .alternatives a:nth-of-type(1):hover button {
+    background-color: #310331;
+    box-shadow: none;
+  }
+  
+  .alternatives a:nth-of-type(2):hover button {
+    background-color: maroon;
+    box-shadow: none;
+  }
 }
