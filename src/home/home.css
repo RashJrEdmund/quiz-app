@@ -70,11 +70,6 @@
   margin: 1rem 0;
 }
 
-.homePage a {
-  align-self: center;
-  margin: 2rem 0;
-}
-
 .homePage .advance-btn {
   background-color: #fff;
   color: #310331;
@@ -84,6 +79,7 @@
   align-self: flex-end;
   padding: 1rem 2rem;
   border-radius: 10px;
+  margin: 2rem auto;
   cursor: pointer;
   transition: 0.5s;
 }

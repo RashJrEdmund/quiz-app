@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-unused-expressions */
 import './App.css';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
@@ -7,7 +8,7 @@ import Getdata from './data/Getdata';
 import Home from './home/Home';
 import Question from './pages/Question';
 import Results from './results/Results';
-import { QuestionsProvider } from './context/Context';
+import { Myquestions } from './context/Context';
 
 function App() {
   const handleError = () => {
@@ -55,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <QuestionsProvider
+      <Myquestions.Provider
         value={{
           question,
           changePage,
@@ -78,7 +79,7 @@ function App() {
             <Route path="/results" element={<Results />} />
           </Routes>
         </BrowserRouter>
-      </QuestionsProvider>
+      </Myquestions.Provider>
     </div>
   );
 }
