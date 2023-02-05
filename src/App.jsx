@@ -11,26 +11,11 @@ import Results from './results/Results';
 import { Myquestions } from './context/Context';
 
 function App() {
-  const handleError = () => {
-    document.querySelector('.question-whole').style =
-      'display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 700;';
-    document.querySelector('.question-whole').innerHTML = 'Getting data...';
-    setTimeout(() => {
-      document.querySelector('.question-whole').innerHTML =
-        'An Error Occured While Fetching Api: </br></br> Check network connection or try refreshing page';
-    }, 2000);
-  };
   const [question, setQuestion] = useState([]);
 
-  const [pageNumber, SetPageNumber] = useState(0);
+  const [areThereQuestions, setAreThereQuestions] = useState(false);
 
   const [answerTracker, setAnswerTracker] = useState({ passed: 0, failed: 0 });
-
-  const changePage = () => {
-    pageNumber === 9
-      ? SetPageNumber(0)
-      : SetPageNumber((prevPage) => prevPage + 1);
-  };
 
   const updateAnswerTracker = (ans, correctAns) => {
     if (ans === correctAns) {
@@ -48,9 +33,14 @@ function App() {
 
   useEffect(() => {
     Getdata()
-      .then((res) => setQuestion([...res]))
+      .then((res) => {
+        console.log('then entered');
+        setQuestion([...res]);
+        setAreThereQuestions(true);
+      })
       .catch(() => {
-        handleError();
+        console.log('catch entered');
+        setAreThereQuestions(false);
       });
   }, []);
 
@@ -59,8 +49,7 @@ function App() {
       <Myquestions.Provider
         value={{
           question,
-          changePage,
-          pageNumber,
+          areThereQuestions,
           updateAnswerTracker,
           answerTracker,
           setAnswerTracker,
