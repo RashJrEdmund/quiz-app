@@ -24,7 +24,7 @@ function Question() {
       document.querySelector('.question-whole').innerHTML =
         'An Error Occured While Fetching Api: </br></br> Check network connection or try refreshing page';
     }, 2000);
-  }, []);
+  });
 
   return (
     <div className="question-whole">

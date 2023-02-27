@@ -34,12 +34,10 @@ function App() {
   useEffect(() => {
     Getdata()
       .then((res) => {
-        console.log('then entered');
         setQuestion([...res]);
         setAreThereQuestions(true);
       })
       .catch(() => {
-        console.log('catch entered');
         setAreThereQuestions(false);
       });
   }, []);
@@ -50,6 +48,11 @@ function App() {
         value={{
           question,
           areThereQuestions,
+          setCredentials,
+          currency,
+          setCurrency,
+          defaultBalance,
+          setDefaultBalance,
           updateAnswerTracker,
           answerTracker,
           setAnswerTracker,

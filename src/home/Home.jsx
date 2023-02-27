@@ -7,15 +7,13 @@ import { Myquestions } from '../context/Context';
 function Home() {
   const { areThereQuestions } = useContext(Myquestions);
   const navigate = useNavigate();
-  console.log('this areThereQuestions', areThereQuestions);
 
   const toQuestions = () => {
     navigate('/question/0');
   };
 
   const handleError = () => {
-    if (areThereQuestions) console.log('handleError');
-    console.log('else part entered');
+    if (areThereQuestions)
     document.querySelector('.question-whole').style =
       'display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 700;';
     document.querySelector('.question-whole').innerHTML = 'Getting data...';
@@ -26,7 +24,6 @@ function Home() {
   };
 
   useEffect(() => {
-    console.log('UseEffect Enter');
     setTimeout(handleError, 2000);
   }, []);
 
