@@ -2,7 +2,7 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable react/prop-types */
 import './question.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Myquestions } from '../context/Context';
 
@@ -16,19 +16,11 @@ function Question() {
     navigate(pageIndex === 9 ? '/results' : `/question/${pageIndex + 1}`);
   };
 
-  useEffect(() => {
-    document.querySelector('.question-whole').style =
-      'display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 700;';
-    document.querySelector('.question-whole').innerHTML = 'Getting data...';
-    setTimeout(() => {
-      document.querySelector('.question-whole').innerHTML =
-        'An Error Occured While Fetching Api: </br></br> Check network connection or try refreshing page';
-    }, 2000);
-  });
-
   return (
     <div className="question-whole">
-      {question.length > 0 && (
+      {question.length < 1 ? (
+        <p className="loading_text">Loading . . .</p>
+      ) : (
         <div className="questionPage">
           <p className="category">
             category: <span> {question[pageIndex].category}</span>

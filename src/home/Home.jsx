@@ -1,31 +1,10 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import './home.css';
-import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Myquestions } from '../context/Context';
 
 function Home() {
-  const { areThereQuestions } = useContext(Myquestions);
   const navigate = useNavigate();
-
-  const toQuestions = () => {
-    navigate('/question/0');
-  };
-
-  const handleError = () => {
-    if (areThereQuestions)
-    document.querySelector('.question-whole').style =
-      'display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: 700;';
-    document.querySelector('.question-whole').innerHTML = 'Getting data...';
-    setTimeout(() => {
-      document.querySelector('.question-whole').innerHTML =
-        'An Error Occured While Fetching Api: </br></br> Check network connection or try refreshing page';
-    }, 2000);
-  };
-
-  useEffect(() => {
-    setTimeout(handleError, 2000);
-  }, []);
 
   return (
     <div className="whole">
@@ -57,9 +36,7 @@ function Home() {
         <button
           type="button"
           className="advance-btn"
-          onClick={() => {
-            toQuestions();
-          }}
+          onClick={() => navigate('/question/0')}
         >
           Advance
         </button>

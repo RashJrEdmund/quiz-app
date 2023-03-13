@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-unused-expressions */
 import './App.css';
@@ -13,33 +14,26 @@ import { Myquestions } from './context/Context';
 function App() {
   const [question, setQuestion] = useState([]);
 
-  const [areThereQuestions, setAreThereQuestions] = useState(false);
-
   const [answerTracker, setAnswerTracker] = useState({ passed: 0, failed: 0 });
 
   const updateAnswerTracker = (ans, correctAns) => {
     if (ans === correctAns) {
-      setAnswerTracker({
-        passed: answerTracker.passed + 1,
-        failed: answerTracker.failed,
-      });
+      setAnswerTracker((prev) => ({
+        ...answerTracker,
+        passed: prev.passed + 1,
+      }));
     } else {
-      setAnswerTracker({
-        passed: answerTracker.passed,
-        failed: answerTracker.failed + 1,
-      });
+      setAnswerTracker((prev) => ({
+        ...answerTracker,
+        failed: prev.passed + 1,
+      }));
     }
   };
 
   useEffect(() => {
     Getdata()
-      .then((res) => {
-        setQuestion([...res]);
-        setAreThereQuestions(true);
-      })
-      .catch(() => {
-        setAreThereQuestions(false);
-      });
+      .then((res) => setQuestion([...res]))
+      .catch((err) => console.error(err));
   }, []);
 
   return (
@@ -47,13 +41,9 @@ function App() {
       <Myquestions.Provider
         value={{
           question,
-          areThereQuestions,
-          setCredentials,
-          currency,
-          setCurrency,
-          defaultBalance,
-          setDefaultBalance,
+
           updateAnswerTracker,
+
           answerTracker,
           setAnswerTracker,
         }}
@@ -61,13 +51,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<Home />} />
-            <Route
-              path="/question/:id"
-              element={
-                // element={Question} use use Context here
-                <Question />
-              }
-            />
+            <Route path="/question/:id" element={<Question />} />
             <Route path="/results" element={<Results />} />
           </Routes>
         </BrowserRouter>

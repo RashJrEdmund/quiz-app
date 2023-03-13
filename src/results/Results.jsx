@@ -13,7 +13,7 @@ function Results() {
 
   const displayResults = () => {
     if (answerTracker.passed < 5) {
-      if (answerTracker.passed < 2) {
+      if (answerTracker.passed < 1) {
         return 'Nothing personal 😹';
       }
       return 'Better luck next time 😟';
