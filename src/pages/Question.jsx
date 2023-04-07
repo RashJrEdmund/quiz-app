@@ -13,7 +13,9 @@ function Question() {
   const pageIndex = +params.id; // this is same as saying pageIndex = parseInt(params.id). it is neccessary to convert to a number bcs the value in the object returned by params is a STRING
 
   const toNextQuestions = () => {
-    navigate(pageIndex === 9 ? '/results' : `/question/${pageIndex + 1}`);
+    navigate(pageIndex === 9 ? '/results' : `/question/${pageIndex + 1}`, {
+      replace: true,
+    });
   };
 
   return (
