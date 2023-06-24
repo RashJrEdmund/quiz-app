@@ -1,13 +1,12 @@
-/* eslint-disable react/no-danger */
-/* eslint-disable no-return-assign */
-/* eslint-disable react/prop-types */
 import './question.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Myquestions } from '../context/Context';
+import { Myquestions } from '../../context/Context';
+import { getFromSession, saveToSession } from '../../services/utils';
 
 function Question() {
-  const { question, updateAnswerTracker } = useContext(Myquestions);
+  const { question, setQuestion, answerTracker, setAnswerTracker } =
+    useContext(Myquestions);
   const navigate = useNavigate();
   const params = useParams();
   const pageIndex = +params.id; // this is same as saying pageIndex = parseInt(params.id). it is neccessary to convert to a number bcs the value in the object returned by params is a STRING
@@ -18,11 +17,26 @@ function Question() {
     });
   };
 
+  const updateAnswerTracker = (ans, correctAns) => {
+    const prevAns = getFromSession('answerTracker') || answerTracker;
+    console.log('this prevAns', getFromSession('anserTracker'));
+
+    if (ans === correctAns) prevAns.passed += 1;
+    else prevAns.failed += 1;
+
+    saveToSession('answerTracker', prevAns);
+
+    setAnswerTracker({ ...prevAns });
+  };
+
+  useEffect(() => {
+    const data = getFromSession('question');
+    if (data) setQuestion([...data]);
+  }, []);
+
   return (
     <div className="question-whole">
-      {question.length < 1 ? (
-        <p className="loading_text">Loading . . .</p>
-      ) : (
+      {question ? (
         <div className="questionPage">
           <p className="category">
             category: <span> {question[pageIndex].category}</span>
@@ -67,6 +81,8 @@ function Question() {
             </button>
           </div>
         </div>
+      ) : (
+        <p className="loading_text">Loading . . .</p>
       )}
     </div>
   );

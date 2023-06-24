@@ -1,10 +1,31 @@
-/* eslint-disable no-console */
-/* eslint-disable react/prop-types */
+import { useContext, useEffect } from 'react';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
+import { Myquestions } from '../context/Context';
+import {
+  getFromSession,
+  removeFromSession,
+  saveToSession,
+} from '../services/utils';
+import Getdata from '../data/Getdata';
 
 function Home() {
+  const { question, setQuestion } = useContext(Myquestions);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const data = getFromSession('question');
+    if (data) setQuestion([...data]);
+    else
+      Getdata()
+        .then((res) => {
+          setQuestion([...res]);
+          saveToSession('question', [...res]);
+        })
+        .catch((err) => console.error(err));
+
+    if (getFromSession('answerTracker')) removeFromSession('answerTracker');
+  }, []);
 
   return (
     <div className="whole">
@@ -33,13 +54,17 @@ function Home() {
             </li>
           </ul>
         </div>
-        <button
-          type="button"
-          className="advance-btn"
-          onClick={() => navigate('/question/0')}
-        >
-          Advance
-        </button>
+        {question ? (
+          <button
+            type="button"
+            className="advance-btn"
+            onClick={() => navigate('/question/0')}
+          >
+            Advance
+          </button>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     </div>
   );

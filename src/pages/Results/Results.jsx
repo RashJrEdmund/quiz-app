@@ -1,14 +1,12 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/no-danger */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/prop-types */
 import './results.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Myquestions } from '../context/Context';
+import { Myquestions } from '../../context/Context';
+import { getFromSession, removeFromSession } from '../../services/utils';
 
 function Results() {
-  const { answerTracker, setAnswerTracker, question } = useContext(Myquestions);
+  const { answerTracker, setAnswerTracker, question, setQuestion } =
+    useContext(Myquestions);
   const naviGate = useNavigate();
 
   const displayResults = () => {
@@ -24,9 +22,29 @@ function Results() {
     return 'good good 😉';
   };
 
-  const backToPage = (TO) => {
-    naviGate(TO);
+  const clearData = (arg) => {
+    if (arg) removeFromSession('question');
+    removeFromSession('answerTracker');
+    setAnswerTracker({ passed: 0, failed: 0 });
   };
+
+  const reStartQuize = () => {
+    clearData();
+    naviGate('/question/0');
+  };
+
+  const endQuize = () => {
+    clearData('all');
+    naviGate('/');
+  };
+
+  useEffect(() => {
+    const ansData = getFromSession('answerTracker');
+    const data = getFromSession('question');
+
+    if (data) setQuestion([...data]);
+    if (ansData) setAnswerTracker(ansData);
+  }, []);
 
   return (
     <div className="results-whole">
@@ -35,11 +53,11 @@ function Results() {
         <div className="score">
           <div className="rights">
             <p>Correct</p>
-            <span>{answerTracker.passed}</span>
+            <span>{answerTracker?.passed}</span>
           </div>
           <div className="wrongs">
             <p>Wrong</p>
-            <span>{answerTracker.failed}</span>
+            <span>{answerTracker?.failed}</span>
           </div>
         </div>
 
@@ -50,9 +68,9 @@ function Results() {
         </p>
 
         <ol className="questions-ans">
-          {question.map((ques, index) => {
+          {question?.map((ques) => {
             return (
-              <li key={index}>
+              <li key={ques.question}>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: ques.question,
@@ -67,24 +85,10 @@ function Results() {
         <p className="would-you-like">would You like to restart the quize?</p>
 
         <div className="option">
-          <button
-            type="button"
-            className="retake"
-            onClick={() => {
-              setAnswerTracker({ passed: 0, failed: 0 });
-              backToPage('/question/0');
-            }}
-          >
+          <button type="button" className="retake" onClick={reStartQuize}>
             Restart
           </button>
-          <button
-            type="button"
-            className="retake"
-            onClick={() => {
-              setAnswerTracker({ passed: 0, failed: 0 });
-              backToPage('/');
-            }}
-          >
+          <button type="button" className="retake" onClick={endQuize}>
             endQuize
           </button>
         </div>
