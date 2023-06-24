@@ -22,7 +22,7 @@ function Home() {
           setQuestion([...res]);
           saveToSession('question', [...res]);
         })
-        .catch((err) => console.error(err));
+        .catch((err) => new Error(err));
 
     if (getFromSession('answerTracker')) removeFromSession('answerTracker');
   }, []);

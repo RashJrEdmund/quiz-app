@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import './question.css';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -19,7 +20,6 @@ function Question() {
 
   const updateAnswerTracker = (ans, correctAns) => {
     const prevAns = getFromSession('answerTracker') || answerTracker;
-    console.log('this prevAns', getFromSession('anserTracker'));
 
     if (ans === correctAns) prevAns.passed += 1;
     else prevAns.failed += 1;
