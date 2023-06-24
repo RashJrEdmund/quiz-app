@@ -1,4 +1,4 @@
-/* eslint-disable */ // this is for /* eslint-disable react/no-danger */
+/* eslint-disable */
 import './question.css';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
