@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import './results.css';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

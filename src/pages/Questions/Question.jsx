@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable react/no-danger */
 import './question.css';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -42,13 +42,13 @@ function Question() {
             category: <span> {question[pageIndex].category}</span>
           </p>
           <header> Question {pageIndex + 1} out of 10</header>
+
           <p
             className="questionSepSep"
             dangerouslySetInnerHTML={{
               __html: question[pageIndex].question,
             }}
           />
-
           <div className="alternatives">
             <button
               className="true_btn"
