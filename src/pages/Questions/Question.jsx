@@ -1,4 +1,3 @@
-/* eslint-disable react/no-danger */
 import './question.css';
 import { useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
