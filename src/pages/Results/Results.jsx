@@ -1,13 +1,13 @@
 /* eslint-disable react/no-danger */
 import './results.css';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Myquestions } from '../../context/Context';
+import { useQuestionContext } from '../../context/Context';
 import { getFromSession, removeFromSession } from '../../services/utils';
 
 function Results() {
   const { answerTracker, setAnswerTracker, question, setQuestion } =
-    useContext(Myquestions);
+    useQuestionContext();
   const naviGate = useNavigate();
 
   const displayResults = () => {

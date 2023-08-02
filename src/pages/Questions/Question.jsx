@@ -1,13 +1,14 @@
 /* eslint-disable react/no-danger */
 import './question.css';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Myquestions } from '../../context/Context';
+import { useQuestionContext } from '../../context/Context';
 import { getFromSession, saveToSession } from '../../services/utils';
 
 function Question() {
   const { question, setQuestion, answerTracker, setAnswerTracker } =
-    useContext(Myquestions);
+    useQuestionContext();
+
   const navigate = useNavigate();
   const params = useParams();
   const pageIndex = +params.id; // this is same as saying pageIndex = parseInt(params.id). it is neccessary to convert to a number bcs the value in the object returned by params is a STRING

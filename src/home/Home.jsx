@@ -1,7 +1,7 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
-import { Myquestions } from '../context/Context';
+import { useQuestionContext } from '../context/Context';
 import {
   getFromSession,
   removeFromSession,
@@ -10,7 +10,7 @@ import {
 import Getdata from '../data/Getdata';
 
 function Home() {
-  const { question, setQuestion } = useContext(Myquestions);
+  const { question, setQuestion } = useQuestionContext();
   const navigate = useNavigate();
 
   useEffect(() => {
